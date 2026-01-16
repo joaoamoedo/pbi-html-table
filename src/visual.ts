@@ -370,7 +370,20 @@ export class Visual implements IVisual {
                 .attr("onerror", () => fallbackImg ? `this.onerror=null;this.src='${fallbackImg}'` : '')
                 .node()
         }
-
+        /**********************************************************/
+		let displayValue: string; 
+		if (typeof value === "number") { 
+		    displayValue = value.toLocaleString("pt-BR", { 
+		    minimumFractionDigits: 2, 
+		    maximumFractionDigits: 2 
+		}); 
+		} else if (!isNaN(Number(value))) 
+		{ displayValue = Number(value).toLocaleString("pt-BR", { 
+		minimumFractionDigits: 2, 
+		maximumFractionDigits: 2 
+		}); 
+		} else { displayValue = value.toString(); }
+        /**********************************************************/
         return create("span").html(value).node();
     }
     
